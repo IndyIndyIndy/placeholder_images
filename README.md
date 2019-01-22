@@ -1,2 +1,2 @@
 # placeholder
-Easily add placeholder images from placeholder.com in TYPO3 records.
+Easily add placeholder images in TYPO3 records generated via imagemagick.
