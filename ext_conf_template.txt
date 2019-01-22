@@ -1,0 +1,6 @@
+
+# cat=basic//; type=string; label=Comma separated list of TYPO3_CONTEXT settings for which the placeholder button should be displayed.
+typo3Contexts = Development
+
+# cat=basic//; type=string; label=Dummy
+dummy =

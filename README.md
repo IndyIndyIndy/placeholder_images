@@ -4,8 +4,6 @@ Easily add placeholder images in TYPO3 records generated via imagemagick.
 @TODO:
 - write readme and doc (with nice images)
 - fix sonarlint issues 
-- require a context (development by default) 
-- contexts configurable in ext-settings
 - configure default values for width, height, etc. inputs in ext-settings
 - gif,jpg,png
 - PlaceholderController and imagemagick operations  
