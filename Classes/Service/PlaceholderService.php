@@ -12,11 +12,11 @@ namespace ChristianEssl\PlaceholderImages\Service;
  *
  ***/
 
+use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Service for placeholder images button
@@ -51,7 +51,7 @@ class PlaceholderService
         $formatText = $this->getTranslation('tx_placeholderimages.image.format');
         $placeholderText = $this->getTranslation('tx_placeholderimages.image.text');
 
-        $configuration = ConfigurationService::getExtensionConfiguration();
+        $configuration = ConfigurationUtility::getExtensionConfiguration();
 
         return '
 						<span class="btn btn-default t3js-placeholder-add-btn ' . $inlineData['config'][$nameObject]['md5'] . '"

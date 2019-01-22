@@ -9,6 +9,10 @@ Easily add placeholder images in TYPO3 records generated via imagemagick.
 - PlaceholderController and imagemagick operations  
 - remove any console.log, var_dump and @todos, unused class uses
 - ext_icon
+- option to use placeholder.com (if no imagemagick/graphicsmagick insttalled)
+if (empty($GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_enabled'])) {
+    return;
+}
 - tests in TYPO 8.7
 - packagist
 - better alternative to the ugly xclassing of InlineControlContainer?

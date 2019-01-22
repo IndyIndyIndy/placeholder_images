@@ -1,5 +1,5 @@
 <?php
-namespace ChristianEssl\PlaceholderImages\Service;
+namespace ChristianEssl\PlaceholderImages\Utility;
 
 /***
  *
@@ -14,13 +14,12 @@ namespace ChristianEssl\PlaceholderImages\Service;
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 
 /**
  * Checks the extension configuration
  */
-class ConfigurationService
+class ConfigurationUtility
 {
 
     /**
