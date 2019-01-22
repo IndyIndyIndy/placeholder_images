@@ -1,0 +1,37 @@
+{
+    "name": "christianessl/placeholder_images",
+    "type": "typo3-cms-extension",
+    "description": "Easily add placeholder images in TYPO3 records generated via imagemagick.",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "placeholder",
+        "images",
+        "fal"
+    ],
+    "homepage": "https://christianessl.at",
+    "authors": [
+        {
+            "name": "Christian Essl",
+            "role": "Developer"
+        }
+    ],
+    "version": "1.0.0",
+    "require": {
+        "typo3/cms-core": "^8.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "ChristianEssl\\PlaceholderImages\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ChristianEssl\\PlaceholderImages\\Tests\\": "Tests"
+        }
+    },
+    "replace": {
+        "placeholder_images": "self.version",
+        "typo3-ter/placeholder_images": "self.version"
+    }
+}

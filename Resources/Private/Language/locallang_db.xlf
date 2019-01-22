@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-01-21T14:48:05Z" product-name="placeholder_images">
+		<header/>
+		<body>
+			<trans-unit id="tx_placeholderimages.button.text">
+				<source>Add placeholder image</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.button.submit">
+				<source>Add</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.width">
+				<source>Width</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.height">
+				<source>Height</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.format">
+				<source>Format</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.text">
+				<source>Text content</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
