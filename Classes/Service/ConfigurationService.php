@@ -36,7 +36,7 @@ class ConfigurationService
     /**
      * @return mixed[]
      */
-    protected static function getExtensionConfiguration() : array
+    public static function getExtensionConfiguration() : array
     {
         try {
             $configuration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class)

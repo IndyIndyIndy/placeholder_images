@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Service for placeholder images button
@@ -44,22 +45,31 @@ class PlaceholderService
     public function getPlaceholderButton($inlineData, $nameObject, $objectPrefix, Folder $folder) : string
     {
         $buttonText = $this->getTranslation('tx_placeholderimages.button.text');
-        $buttonSubmit = $this->getTranslation('tx_placeholderimages.button.submit');
-        $width = $this->getTranslation('tx_placeholderimages.image.width');
-        $height = $this->getTranslation('tx_placeholderimages.image.height');
-        $format = $this->getTranslation('tx_placeholderimages.image.format');
-        $placeholder = $this->getTranslation('tx_placeholderimages.image.text');
+        $buttonSubmitText = $this->getTranslation('tx_placeholderimages.button.submit');
+        $widthText = $this->getTranslation('tx_placeholderimages.image.width');
+        $heightText = $this->getTranslation('tx_placeholderimages.image.height');
+        $formatText = $this->getTranslation('tx_placeholderimages.image.format');
+        $placeholderText = $this->getTranslation('tx_placeholderimages.image.text');
+
+        $configuration = ConfigurationService::getExtensionConfiguration();
 
         return '
 						<span class="btn btn-default t3js-placeholder-add-btn ' . $inlineData['config'][$nameObject]['md5'] . '"
 							data-file-irre-object="' . htmlspecialchars($objectPrefix) . '"
 							data-target-folder="' . htmlspecialchars($folder->getCombinedIdentifier()) . '"
 							title="' . $buttonText . '"
-							data-text-width="' . $width . '"
-							data-text-height="' . $height . '"
-							data-text-format="' . $format . '"
-							data-text-placeholder="' . $placeholder . '"
-							data-btn-submit="' . $buttonSubmit . '"
+							
+							data-width-text="' . $widthText . '"
+							data-height-text="' . $heightText . '"
+							data-format-text="' . $formatText . '"
+							data-placeholder-text="' . $placeholderText . '"							
+							
+							data-width-default="' . $configuration['defaultWidth'] . '"
+							data-height-default="' . $configuration['defaultHeight'] . '"
+							data-format-default="' . $configuration['defaultFormat'] . '"
+							data-placeholder-default="' . $configuration['defaultText'] . '"
+							
+							data-btn-submit="' . $buttonSubmitText . '"
 							>
 							' . $this->iconFactory->getIcon('actions-system-extension-configure', Icon::SIZE_SMALL)->render() . '
 							' . $buttonText . '</span>';

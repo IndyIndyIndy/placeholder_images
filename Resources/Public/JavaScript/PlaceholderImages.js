@@ -26,7 +26,7 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
     };
 
     /**
-     * @param {JQuery} $target
+     * @param {Object} $target
      */
     PlaceholderImages.triggerModal = function($target) {
         var self = this;
@@ -40,12 +40,23 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
                 $('<input>')
                     .attr('type', 'text')
                     .attr('class', 'form-control width')
-                    .attr('placeholder', $target.data('text-width')),
+                    .attr('value', $target.data('width-default'))
+                    .attr('placeholder', $target.data('width-text')),
                 $('<input>')
                     .attr('type', 'text')
                     .attr('class', 'form-control height')
-                    .attr('placeholder', $target.data('text-height')),
-                // @todo more input elements
+                    .attr('value', $target.data('height-default'))
+                    .attr('placeholder', $target.data('height-text')),
+                $('<input>')
+                    .attr('type', 'text')
+                    .attr('class', 'form-control format')
+                    .attr('value', $target.data('format-default'))
+                    .attr('placeholder', $target.data('format-text')),
+                $('<input>')
+                    .attr('type', 'text')
+                    .attr('class', 'form-control placeholder')
+                    .attr('value', $target.data('placeholder-default'))
+                    .attr('placeholder', $target.data('placeholder-text')),
                 $('<div>')
                     .attr('class', 'help-block')
                     .html(self.securityUtility.encodeHtml(testText, false))
@@ -61,9 +72,12 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
                 trigger: function() {
                     var width = $modal.find('input.width').val();
                     var height = $modal.find('input.height').val();
-                    if (width) {
+                    var format = $modal.find('input.format').val();
+                    var placeholder = $modal.find('input.placeholder').val();
+
+                    if (width || height) {
                         $modal.modal('hide');
-                        self.addPlaceholderImage($target, width, height);
+                        self.addPlaceholderImage($target, width, height, format, placeholder);
                     }
                 }
             }]
@@ -71,11 +85,13 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
     };
 
     /**
-     * @param {JQuery} $target
-     * @param string width
-     * @param string height
+     * @param {Object} $trigger
+     * @param {int} width
+     * @param {int} height
+     * @param {string} format
+     * @param {string} placeholder
      */
-    PlaceholderImages.addPlaceholderImage = function($trigger, width, height) {
+    PlaceholderImages.addPlaceholderImage = function($trigger, width, height, format, placeholder) {
         var target = $trigger.data('target-folder');
         var irreObjectUid = $trigger.data('file-irre-object');
 
@@ -85,6 +101,8 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
             {
                 width: width,
                 height: height,
+                format: format,
+                placeholder: placeholder,
                 targetFolder: target
             }, function(data) {
                 if (data.file) {
