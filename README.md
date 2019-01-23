@@ -6,7 +6,6 @@ Easily add placeholder images in TYPO3 using placeholder.com.
 - option to download images locally
 - rename placeholderservice
 - modal styling
-- ext_icon
 - tests in TYPO 8.7
 - better alternative to the ugly xclassing of InlineControlContainer?
 - remove any console.log, var_dump and @todos, unused class uses
