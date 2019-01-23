@@ -1,6 +1,8 @@
 # TYPO3 Extension "placeholder_images"
 Easily add placeholder images in TYPO3 using placeholder.com.
 
+WORK IN PROGRESS
+
 @TODO:
 - use placeholder.com
 - option to download images locally
