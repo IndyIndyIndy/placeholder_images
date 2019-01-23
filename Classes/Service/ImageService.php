@@ -23,10 +23,12 @@ class ImageService
      * @param integer $height
      * @param string $format
      * @param string $placeholder
+     * @param string $bgcolor
+     * @param string $textcolor
      *
      * @return null
      */
-    public function getPlaceholderImage($width, $height, $format, $placeholder)
+    public function getPlaceholderImage($width, $height, $format, $placeholder, $bgcolor, $textcolor)
     {
 
     }

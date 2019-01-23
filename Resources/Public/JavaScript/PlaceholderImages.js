@@ -17,7 +17,7 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
         securityUtility: new SecurityUtility()
     };
 
-        PlaceholderImages.init = function() {
+    PlaceholderImages.init = function() {
         var self = this;
 
         $(document).on('click', '.t3js-placeholder-add-btn', function (e) {
@@ -57,6 +57,16 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
                     .attr('class', 'form-control placeholder')
                     .attr('value', $target.data('placeholder-default'))
                     .attr('placeholder', $target.data('placeholder-text')),
+                $('<input>')
+                    .attr('type', 'text')
+                    .attr('class', 'form-control bgcolor')
+                    .attr('value', $target.data('bgcolor-default'))
+                    .attr('placeholder', $target.data('bgcolor-text')),
+                $('<input>')
+                    .attr('type', 'text')
+                    .attr('class', 'form-control textcolor')
+                    .attr('value', $target.data('textcolor-default'))
+                    .attr('placeholder', $target.data('textcolor-text')),
                 $('<div>')
                     .attr('class', 'help-block')
                     .html(self.securityUtility.encodeHtml(testText, false))
@@ -74,10 +84,12 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
                     var height = $modal.find('input.height').val();
                     var format = $modal.find('input.format').val();
                     var placeholder = $modal.find('input.placeholder').val();
+                    var bgcolor = $modal.find('input.bgcolor').val();
+                    var textcolor = $modal.find('input.textcolor').val();
 
                     if (width || height) {
                         $modal.modal('hide');
-                        self.addPlaceholderImage($target, width, height, format, placeholder);
+                        self.addPlaceholderImage($target, width, height, format, placeholder, bgcolor, textcolor);
                     }
                 }
             }]
@@ -90,8 +102,10 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
      * @param {int} height
      * @param {string} format
      * @param {string} placeholder
+     * @param {string} bgcolor
+     * @param {string} textcolor
      */
-    PlaceholderImages.addPlaceholderImage = function($trigger, width, height, format, placeholder) {
+    PlaceholderImages.addPlaceholderImage = function($trigger, width, height, format, placeholder, bgcolor, textcolor) {
         var target = $trigger.data('target-folder');
         var irreObjectUid = $trigger.data('file-irre-object');
 
@@ -103,6 +117,8 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
                 height: height,
                 format: format,
                 placeholder: placeholder,
+                bgcolor: bgcolor,
+                textcolor: textcolor,
                 targetFolder: target
             }, function(data) {
                 if (data.file) {

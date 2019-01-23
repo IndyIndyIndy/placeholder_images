@@ -21,6 +21,12 @@
 			<trans-unit id="tx_placeholderimages.image.text">
 				<source>Text content</source>
 			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.bgcolor">
+				<source>Background color</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.textcolor">
+				<source>Text color</source>
+			</trans-unit>
 
 			<trans-unit id="tx_placeholderimages.image.error.unknown_error">
 				<source>An unknown error occured generating the image.</source>

@@ -2,12 +2,10 @@
 Easily add placeholder images in TYPO3 using placeholder.com.
 
 @TODO:
-- backgound-color configurable: default grey
 - use placeholder.com
-- mirroring option
+- option to download images locally
 - rename placeholderservice
 - modal styling
-- gif,jpg,png
 - ext_icon
 - tests in TYPO 8.7
 - better alternative to the ugly xclassing of InlineControlContainer?

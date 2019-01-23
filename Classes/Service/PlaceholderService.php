@@ -50,6 +50,8 @@ class PlaceholderService
         $heightText = $this->getTranslation('tx_placeholderimages.image.height');
         $formatText = $this->getTranslation('tx_placeholderimages.image.format');
         $placeholderText = $this->getTranslation('tx_placeholderimages.image.text');
+        $bgcolorText = $this->getTranslation('tx_placeholderimages.image.bgcolor');
+        $textcolorText = $this->getTranslation('tx_placeholderimages.image.textcolor');
 
         $configuration = ConfigurationUtility::getExtensionConfiguration();
 
@@ -62,12 +64,16 @@ class PlaceholderService
 							data-width-text="' . $widthText . '"
 							data-height-text="' . $heightText . '"
 							data-format-text="' . $formatText . '"
-							data-placeholder-text="' . $placeholderText . '"							
+							data-placeholder-text="' . $placeholderText . '"	
+							data-bgcolor-text="' . $bgcolorText . '"	
+							data-textcolor-text="' . $textcolorText . '"							
 							
 							data-width-default="' . $configuration['defaultWidth'] . '"
 							data-height-default="' . $configuration['defaultHeight'] . '"
 							data-format-default="' . $configuration['defaultFormat'] . '"
 							data-placeholder-default="' . $configuration['defaultText'] . '"
+							data-bgcolor-default="' . $configuration['defaultBGColor'] . '"
+							data-textcolor-default="' . $configuration['defaultTextColor'] . '"
 							
 							data-btn-submit="' . $buttonSubmitText . '"
 							>

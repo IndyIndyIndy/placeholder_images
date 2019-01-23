@@ -42,6 +42,8 @@ class PlaceholderController
         $height = (int) $request->getParsedBody()['height'];
         $format = $request->getParsedBody()['format'];
         $placeholder = $request->getParsedBody()['placeholder'];
+        $bgcolor = $request->getParsedBody()['bgcolor'];
+        $textcolor = $request->getParsedBody()['textcolor'];
 
         if (!$width) {
             $width = $height;
@@ -52,7 +54,7 @@ class PlaceholderController
 
         if (!empty($width)) {
             $data = [];
-            $file = $this->createFileRelation($width, $height, $format, $placeholder, $targetFolderIdentifier);
+            $file = $this->createFileRelation($width, $height, $format, $placeholder, $bgcolor, $textcolor, $targetFolderIdentifier);
             if ($file !== null) {
                 $data['file'] = $file->getUid();
             } else {
@@ -68,16 +70,18 @@ class PlaceholderController
      * @param integer $height
      * @param string $format
      * @param string $placeholder
+     * @param string $bgcolor
+     * @param string $textcolor
      * @param string $targetFolderIdentifier
      *
      * @return File|null
      */
-    protected function createFileRelation($width, $height, $format, $placeholder, $targetFolderIdentifier)
+    protected function createFileRelation($width, $height, $format, $placeholder, $bgcolor, $textcolor, $targetFolderIdentifier)
     {
         $targetFolder = $this->getTargetFolder($targetFolderIdentifier);
 
         $imageService = GeneralUtility::makeInstance(ImageService::class);
-        $image = $imageService->getPlaceholderImage($width, $height, $format, $placeholder);
+        $image = $imageService->getPlaceholderImage($width, $height, $format, $placeholder, $bgcolor, $textcolor);
 
         // @todo support both placeholder.com and locally downloadingg the images
         throw new NotImplementedMethodException();
