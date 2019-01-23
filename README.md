@@ -1,18 +1,17 @@
 # TYPO3 Extension "placeholder_images"
-Easily add placeholder images in TYPO3 records generated via imagemagick.
+Easily add placeholder images in TYPO3 using placeholder.com.
 
 @TODO:
-- write readme and doc (with nice images)
-- fix sonarlint issues 
+- backgound-color configurable: default grey
+- use placeholder.com
+- mirroring option
+- rename placeholderservice
 - modal styling
 - gif,jpg,png
-- PlaceholderController and imagemagick operations  
-- remove any console.log, var_dump and @todos, unused class uses
 - ext_icon
-- option to use placeholder.com (if no imagemagick/graphicsmagick insttalled)
-if (empty($GLOBALS['TYPO3_CONF_VARS']['GFX']['processor_enabled'])) {
-    return;
-}
 - tests in TYPO 8.7
-- packagist
 - better alternative to the ugly xclassing of InlineControlContainer?
+- remove any console.log, var_dump and @todos, unused class uses
+- fix sonarlint issues 
+- write readme and doc (with nice images)
+- packagist

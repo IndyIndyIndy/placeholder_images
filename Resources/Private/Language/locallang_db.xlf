@@ -21,6 +21,13 @@
 			<trans-unit id="tx_placeholderimages.image.text">
 				<source>Text content</source>
 			</trans-unit>
+
+			<trans-unit id="tx_placeholderimages.image.error.unknown_error">
+				<source>An unknown error occured generating the image.</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.error.empty_request">
+				<source>The request was empty.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

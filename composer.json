@@ -1,7 +1,7 @@
 {
     "name": "christianessl/placeholder_images",
     "type": "typo3-cms-extension",
-    "description": "Easily add placeholder images in TYPO3 records generated via imagemagick.",
+    "description": "Easily add placeholder images in TYPO3 using placeholder.com.",
     "keywords": [
         "TYPO3",
         "extension",

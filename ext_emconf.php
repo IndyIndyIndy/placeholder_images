@@ -6,7 +6,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Placeholder Images',
-    'description' => 'Easily add placeholder images in TYPO3 records generated via imagemagick.',
+    'description' => 'Easily add placeholder images in TYPO3 using placeholder.com.',
     'category' => 'misc',
     'author' => 'Christian Eßl',
     'author_email' => 'indy.essl@gmail.com',
