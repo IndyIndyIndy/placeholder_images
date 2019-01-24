@@ -19,6 +19,3 @@ defaultBGColor = #d7d7d7
 
 # cat=basic//; type=color; label=Default background color
 defaultTextColor = #a9a9a9
-
-# cat=basic//; type=boolean; label=Download placeholder.com images locally
-downloadLocally = 0
