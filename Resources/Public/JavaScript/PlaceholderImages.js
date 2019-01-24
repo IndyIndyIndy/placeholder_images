@@ -122,9 +122,6 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
                 targetFolder: target
             }, function(data) {
                 if (data.file) {
-                    console.log(data);
-                    console.log(irreObjectUid);
-                    // @todo test this
                     window.inline.delayedImportElement(irreObjectUid, 'sys_file', data.file, 'file');
                 } else {
                     var $confirm = Modal.confirm(
