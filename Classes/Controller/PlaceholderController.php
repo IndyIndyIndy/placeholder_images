@@ -12,14 +12,12 @@ namespace ChristianEssl\PlaceholderImages\Controller;
  *
  ***/
 
-use ChristianEssl\PlaceholderImages\OnlineMedia\Helpers\PlaceholderHelper;
+use ChristianEssl\PlaceholderImages\File\PlaceholderDownloader;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Resource\File;
-use TYPO3\CMS\Core\Resource\Folder;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -62,7 +60,7 @@ class PlaceholderController
 
         if (!empty($width)) {
             $data = [];
-            $file = $this->createFileRelation($imageSettings, $targetFolderIdentifier);
+            $file = $this->getFile($imageSettings, $targetFolderIdentifier);
             if ($file !== null) {
                 $data['file'] = $file->getUid();
             } else {
@@ -79,78 +77,11 @@ class PlaceholderController
      *
      * @return File|null
      */
-    protected function createFileRelation($imageSettings, $targetFolderIdentifier)
+    protected function getFile($imageSettings, $targetFolderIdentifier)
     {
-        $targetFolder = $this->getTargetFolder($targetFolderIdentifier);
-
-        $title = 'Placeholder Image';
-        if (isset($imageSettings['placeholder']) && strlen($imageSettings['placeholder']) > 0) {
-            $title = $imageSettings['placeholder'];
-        }
-        $fileName = $title . ' ' . $imageSettings['width'] . 'x' . $imageSettings['height'];
-
-        $url = $this->buildPlaceholderDotComURL($imageSettings);
-        $placeholderHelper = GeneralUtility::makeInstance(PlaceholderHelper::class, 'placeholder');
-        $placeholderHelper->setFileName($fileName);
-
-        return $placeholderHelper->transformUrlToFile($url, $targetFolder);
-    }
-
-
-    /**
-     * @param array $settings
-     *
-     * @return string
-     */
-    protected function buildPlaceholderDotComURL($settings) : string
-    {
-        $scheme = GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://';
-        $url = $scheme.'via.placeholder.com/';
-
-        // dimensions
-        $width = $settings['width'];
-        $height = $settings['height'];
-        $url .= $width.'x'.$height;
-
-        // colors
-        if (isset($settings['bgcolor']) && isset($settings['textcolor'])) {
-            $bcolor = str_replace('#', '', $settings['bgcolor']);
-            $textcolor = str_replace('#', '', $settings['textcolor']);
-            $url .= '/'.$bcolor.'/'.$textcolor;
-        }
-
-        // file extension
-        if (isset($settings['format'])) {
-            $url .= '.'.$settings['format'];
-        }
-
-        // file extension
-        if (isset($settings['placeholder']) && strlen($settings['placeholder']) > 0) {
-            $url .= '?text='.urlencode($settings['placeholder']);
-        }
-
-        return $url;
-    }
-
-    /**
-     * @param string $targetFolderIdentifier
-     *
-     * @return Folder
-     */
-    protected function getTargetFolder($targetFolderIdentifier) : Folder
-    {
-        $targetFolder = null;
-        if ($targetFolderIdentifier) {
-            try {
-                $targetFolder = ResourceFactory::getInstance()->getFolderObjectFromCombinedIdentifier($targetFolderIdentifier);
-            } catch (\Exception $e) {
-                $targetFolder = null;
-            }
-        }
-        if ($targetFolder === null) {
-            $targetFolder = $this->getBackendUser()->getDefaultUploadFolder();
-        }
-        return $targetFolder;
+        $placeholderDownloader = GeneralUtility::makeInstance(PlaceholderDownloader::class);
+        $placeholderDownloader->getFile($imageSettings, $targetFolderIdentifier);
+        return $placeholderDownloader->getFile($imageSettings, $targetFolderIdentifier);
     }
 
     /**
