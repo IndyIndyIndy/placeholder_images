@@ -6,7 +6,6 @@ WORK IN PROGRESS
 @TODO:
 - use placeholder.com
 - option to download images locally
-- rename placeholderservice
 - modal styling
 - tests in TYPO 8.7
 - better alternative to the ugly xclassing of InlineControlContainer?

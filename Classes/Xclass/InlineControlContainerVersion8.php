@@ -13,7 +13,7 @@ namespace ChristianEssl\PlaceholderImages\Xclass;
  ***/
 
 use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
-use ChristianEssl\PlaceholderImages\Service\PlaceholderService;
+use ChristianEssl\PlaceholderImages\Utility\InlineControlButtonUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\OnlineMedia\Helpers\OnlineMediaHelperRegistry;
@@ -104,8 +104,8 @@ class InlineControlContainerVersion8 extends \TYPO3\CMS\Backend\Form\Container\I
 
                 if (ConfigurationUtility::isCurrentTYPO3ContextAllowed()) {
                     $this->requireJsModules[] = 'TYPO3/CMS/PlaceholderImages/PlaceholderImages';
-                    $placeholderService = GeneralUtility::makeInstance(PlaceholderService::class);
-                    $item .= $placeholderService->getPlaceholderButton($this->inlineData, $nameObject, $objectPrefix, $folder);
+                    $InlineControlButtonUtility = GeneralUtility::makeInstance(InlineControlButtonUtility::class);
+                    $item .= $InlineControlButtonUtility->getPlaceholderButton($this->inlineData, $nameObject, $objectPrefix, $folder);
                 }
 
                 ### CUSTOM PLACEHOLDER EXT CODE END ###

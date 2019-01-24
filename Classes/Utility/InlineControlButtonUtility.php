@@ -1,5 +1,5 @@
 <?php
-namespace ChristianEssl\PlaceholderImages\Service;
+namespace ChristianEssl\PlaceholderImages\Utility;
 
 /***
  *
@@ -19,9 +19,9 @@ use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Service for placeholder images button
+ * Utility for placing the placeholder button in the InlineControlContainer
  */
-class PlaceholderService
+class InlineControlButtonUtility
 {
 
     /**
