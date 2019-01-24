@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\OnlineMedia\Helpers\OnlineMediaHelperRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Xclass for TYPO3 9.x

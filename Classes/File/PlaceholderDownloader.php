@@ -13,11 +13,11 @@ namespace ChristianEssl\PlaceholderImages\File;
  ***/
 
 use TYPO3\CMS\Core\Resource\DuplicationBehavior;
+use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Download the placeholder and add it to FAL
@@ -81,8 +81,12 @@ class PlaceholderDownloader
                     $fileIndexEntry['folder_hash'] === $targetFolder->getHashedIdentifier()
                     && (int)$fileIndexEntry['storage'] === $targetFolder->getStorage()->getUid()
                 ) {
-                    $file = $resourceFactory->getFileObject($fileIndexEntry['uid'], $fileIndexEntry);
-                    break;
+                    try {
+                        $file = $resourceFactory->getFileObject($fileIndexEntry['uid'], $fileIndexEntry);
+                        break;
+                    } catch(FileDoesNotExistException $e) {
+
+                    }
                 }
             }
         }
@@ -105,7 +109,7 @@ class PlaceholderDownloader
             }
         }
         if ($targetFolder === null) {
-            $targetFolder = $this->getBackendUser()->getDefaultUploadFolder();
+            $targetFolder = $GLOBALS['BE_USER']->getDefaultUploadFolder();
         }
         return $targetFolder;
     }
@@ -122,8 +126,7 @@ class PlaceholderDownloader
             $title = $settings['placeholder'];
         }
         $fileName = $title . ' ' . $settings['width'] . 'x' . $settings['height'];
-        $fileName .= '.'.$settings['format'];
-        return $fileName;
+        return $fileName . '.' . $settings['format'];
     }
 
     /**
@@ -139,23 +142,23 @@ class PlaceholderDownloader
         // dimensions
         $width = $settings['width'];
         $height = $settings['height'];
-        $url .= $width.'x'.$height;
+        $url .= $width . 'x' . $height;
 
         // colors
         if (isset($settings['bgcolor']) && isset($settings['textcolor'])) {
             $bcolor = str_replace('#', '', $settings['bgcolor']);
             $textcolor = str_replace('#', '', $settings['textcolor']);
-            $url .= '/'.$bcolor.'/'.$textcolor;
+            $url .= '/' . $bcolor . '/'.$textcolor;
         }
 
         // file extension
         if (isset($settings['format'])) {
-            $url .= '.'.$settings['format'];
+            $url .= '.' . $settings['format'];
         }
 
         // file extension
         if (isset($settings['placeholder']) && strlen($settings['placeholder']) > 0) {
-            $url .= '?text='.urlencode($settings['placeholder']);
+            $url .= '?text=' . urlencode($settings['placeholder']);
         }
 
         return $url;

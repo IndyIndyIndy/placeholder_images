@@ -38,9 +38,8 @@ class ConfigurationUtility
     public static function getExtensionConfiguration() : array
     {
         try {
-            $configuration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ExtensionConfiguration::class)
+            return GeneralUtility::makeInstance(ExtensionConfiguration::class)
                 ->get('placeholder_images');
-            return $configuration;
         } catch (\TYPO3\CMS\Core\Exception $e) {
             return [];
         }

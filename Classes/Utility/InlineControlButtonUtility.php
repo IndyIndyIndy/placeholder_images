@@ -12,7 +12,6 @@ namespace ChristianEssl\PlaceholderImages\Utility;
  *
  ***/
 
-use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Resource\Folder;
@@ -82,6 +81,8 @@ class InlineControlButtonUtility
     }
 
     /**
+     * @param string $key
+     *
      * @return string
      */
     protected function getTranslation($key) : string

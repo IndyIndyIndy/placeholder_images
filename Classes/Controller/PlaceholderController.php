@@ -15,7 +15,6 @@ namespace ChristianEssl\PlaceholderImages\Controller;
 use ChristianEssl\PlaceholderImages\File\PlaceholderDownloader;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -82,14 +81,6 @@ class PlaceholderController
         $placeholderDownloader = GeneralUtility::makeInstance(PlaceholderDownloader::class);
         $placeholderDownloader->getFile($imageSettings, $targetFolderIdentifier);
         return $placeholderDownloader->getFile($imageSettings, $targetFolderIdentifier);
-    }
-
-    /**
-     * @return BackendUserAuthentication
-     */
-    protected function getBackendUser() : BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'];
     }
 
     /**
