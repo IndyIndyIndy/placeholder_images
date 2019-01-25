@@ -103,9 +103,8 @@ class InlineControlContainerVersion8 extends \TYPO3\CMS\Backend\Form\Container\I
                 ### CUSTOM PLACEHOLDER EXT CODE BEGIN ###
 
                 if (ConfigurationUtility::isCurrentTYPO3ContextAllowed()) {
-                    $this->requireJsModules[] = 'TYPO3/CMS/PlaceholderImages/PlaceholderImages';
-                    $InlineControlButtonUtility = GeneralUtility::makeInstance(InlineControlButtonUtility::class);
-                    $item .= $InlineControlButtonUtility->getPlaceholderButton($this->inlineData, $nameObject, $objectPrefix, $folder);
+                    InlineControlButtonUtility::loadJavaScript();
+                    $item .= InlineControlButtonUtility::getPlaceholderButton($this->inlineData, $nameObject, $objectPrefix, $folder);
                 }
 
                 ### CUSTOM PLACEHOLDER EXT CODE END ###

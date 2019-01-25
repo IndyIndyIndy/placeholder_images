@@ -6,11 +6,13 @@ WORK IN PROGRESS
 @TODO:
 - format select options
 - colorpicker
+- text in modal
+- improve initialization of js-files
 - placeholder count field -> upload multiple images at once
 - different options for image source:
--- placeholder.com (done)
--- local imagemagick generation
--- custom self-hosted solution 
+    - placeholder.com (done)
+    - local imagemagick generation
+    - custom self-hosted solution 
 - rename some variables (spellchecking)
 - tests in TYPO 8.7
 - better alternative to the ugly xclassing of InlineControlContainer?

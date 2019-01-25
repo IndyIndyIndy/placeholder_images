@@ -14,6 +14,7 @@ namespace ChristianEssl\PlaceholderImages\Utility;
 
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -22,17 +23,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class InlineControlButtonUtility
 {
-
-    /**
-     * @var IconFactory
-     */
-    protected $iconFactory;
-
-    public function __construct()
-    {
-        $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-    }
-
     /**
      * @param array $inlineData
      * @param string $nameObject
@@ -41,18 +31,20 @@ class InlineControlButtonUtility
      *
      * @return string
      */
-    public function getPlaceholderButton($inlineData, $nameObject, $objectPrefix, Folder $folder) : string
+    public static function getPlaceholderButton($inlineData, $nameObject, $objectPrefix, Folder $folder) : string
     {
-        $buttonText = $this->getTranslation('tx_placeholderimages.button.text');
-        $buttonSubmitText = $this->getTranslation('tx_placeholderimages.button.submit');
-        $widthText = $this->getTranslation('tx_placeholderimages.image.width');
-        $heightText = $this->getTranslation('tx_placeholderimages.image.height');
-        $formatText = $this->getTranslation('tx_placeholderimages.image.format');
-        $placeholderText = $this->getTranslation('tx_placeholderimages.image.text');
-        $bgcolorText = $this->getTranslation('tx_placeholderimages.image.bgcolor');
-        $textcolorText = $this->getTranslation('tx_placeholderimages.image.textcolor');
+        $buttonText = self::getTranslation('tx_placeholderimages.button.text');
+        $buttonSubmitText = self::getTranslation('tx_placeholderimages.button.submit');
+        $widthText = self::getTranslation('tx_placeholderimages.image.width');
+        $heightText = self::getTranslation('tx_placeholderimages.image.height');
+        $formatText = self::getTranslation('tx_placeholderimages.image.format');
+        $placeholderText = self::getTranslation('tx_placeholderimages.image.text');
+        $bgcolorText = self::getTranslation('tx_placeholderimages.image.bgcolor');
+        $textcolorText = self::getTranslation('tx_placeholderimages.image.textcolor');
 
         $configuration = ConfigurationUtility::getExtensionConfiguration();
+
+        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
 
         return '
 						<span class="btn btn-default t3js-placeholder-add-btn ' . $inlineData['config'][$nameObject]['md5'] . '"
@@ -76,8 +68,20 @@ class InlineControlButtonUtility
 							
 							data-btn-submit="' . $buttonSubmitText . '"
 							>
-							' . $this->iconFactory->getIcon('actions-system-extension-configure', Icon::SIZE_SMALL)->render() . '
+							' . $iconFactory->getIcon('actions-system-extension-configure', Icon::SIZE_SMALL)->render() . '
 							' . $buttonText . '</span>';
+    }
+
+    /**
+     * @return void
+     */
+    public static function loadJavaScript()
+    {
+        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/PlaceholderImages/PlaceholderUploader', 'function(PlaceholderUploader) {
+			PlaceholderUploader.init();
+		}');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/PlaceholderImages/PlaceholderFormBuilder');
     }
 
     /**
@@ -85,7 +89,7 @@ class InlineControlButtonUtility
      *
      * @return string
      */
-    protected function getTranslation($key) : string
+    protected static function getTranslation($key) : string
     {
         return htmlspecialchars($GLOBALS['LANG']->sL('LLL:EXT:placeholder_images/Resources/Private/Language/locallang_db.xlf:'.$key));
     }
