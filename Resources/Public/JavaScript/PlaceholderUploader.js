@@ -47,10 +47,11 @@ define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Sev
                         var placeholder = $modal.find('input.placeholder').val();
                         var bgcolor = $modal.find('input.bgcolor').val();
                         var textcolor = $modal.find('input.textcolor').val();
+                        var count = $modal.find('input.count').val();
 
                         if (width || height) {
                             $modal.modal('hide');
-                            self.addPlaceholderImage($target, width, height, format, placeholder, bgcolor, textcolor);
+                            self.addPlaceholderImage($target, width, height, format, placeholder, bgcolor, textcolor, count);
                         }
                     }
                 }]
@@ -65,8 +66,9 @@ define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Sev
          * @param {string} placeholder
          * @param {string} bgcolor
          * @param {string} textcolor
+         * @param {int} count
          */
-        PlaceholderUploader.addPlaceholderImage = function($trigger, width, height, format, placeholder, bgcolor, textcolor) {
+        PlaceholderUploader.addPlaceholderImage = function($trigger, width, height, format, placeholder, bgcolor, textcolor, count) {
             var target = $trigger.data('target-folder');
             var irreObjectUid = $trigger.data('file-irre-object');
 
@@ -83,7 +85,9 @@ define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Sev
                     targetFolder: target
                 }, function(data) {
                     if (data.file) {
-                        window.inline.delayedImportElement(irreObjectUid, 'sys_file', data.file, 'file');
+                        for (var i = 0; i < count; i++) {
+                            window.inline.delayedImportElement(irreObjectUid, 'sys_file', data.file, 'file');
+                        }
                     } else {
                         var $confirm = Modal.confirm(
                             'ERROR',

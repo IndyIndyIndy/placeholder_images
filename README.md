@@ -6,8 +6,8 @@ WORK IN PROGRESS
 @TODO:
 - format select options
 - colorpicker
+- count integer only - minval 1, maxval ?
 - text in modal
-- placeholder count field -> upload multiple images at once
 - different options for image source:
     - placeholder.com (done)
     - local imagemagick generation

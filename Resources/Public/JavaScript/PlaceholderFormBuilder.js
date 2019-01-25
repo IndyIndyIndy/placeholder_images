@@ -63,20 +63,26 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
                         .attr('class', 'row')
                         .append([
                             $('<div>')
-                                .attr('class', 'form-group col-sm-6')
+                                .attr('class', 'form-group col-sm-12')
                                 .append([
-                                    self.getLabel('format', $target),
-                                    self.getInput('format', $target)
+                                    self.getLabel('placeholder', $target),
+                                    self.getInput('placeholder', $target)
                                 ])
                         ]),
                     $('<div>')
                         .attr('class', 'row')
                         .append([
                             $('<div>')
-                                .attr('class', 'form-group col-sm-12')
+                                .attr('class', 'form-group col-sm-6')
                                 .append([
-                                    self.getLabel('placeholder', $target),
-                                    self.getInput('placeholder', $target)
+                                    self.getLabel('format', $target),
+                                    self.getInput('format', $target)
+                                ]),
+                            $('<div>')
+                                .attr('class', 'form-group col-sm-6')
+                                .append([
+                                    self.getLabel('count', $target),
+                                    self.getInput('count', $target)
                                 ])
                         ]),
                     $('<div>')

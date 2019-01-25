@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="tx_placeholderimages.button.text">
-				<source>Add placeholder image</source>
+				<source>Add placeholder images</source>
 			</trans-unit>
 			<trans-unit id="tx_placeholderimages.button.submit">
 				<source>Add</source>
@@ -26,6 +26,9 @@
 			</trans-unit>
 			<trans-unit id="tx_placeholderimages.image.textcolor">
 				<source>Text color</source>
+			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.count">
+				<source>Anzahl</source>
 			</trans-unit>
 
 			<trans-unit id="tx_placeholderimages.image.error.unknown_error">

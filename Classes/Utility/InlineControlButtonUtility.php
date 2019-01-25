@@ -41,6 +41,7 @@ class InlineControlButtonUtility
         $placeholderText = self::getTranslation('tx_placeholderimages.image.text');
         $bgcolorText = self::getTranslation('tx_placeholderimages.image.bgcolor');
         $textcolorText = self::getTranslation('tx_placeholderimages.image.textcolor');
+        $count = self::getTranslation('tx_placeholderimages.image.count');
 
         $configuration = ConfigurationUtility::getExtensionConfiguration();
 
@@ -57,7 +58,8 @@ class InlineControlButtonUtility
 							data-format-text="' . $formatText . '"
 							data-placeholder-text="' . $placeholderText . '"	
 							data-bgcolor-text="' . $bgcolorText . '"	
-							data-textcolor-text="' . $textcolorText . '"							
+							data-textcolor-text="' . $textcolorText . '"	
+							data-count-text="' . $count . '"							
 							
 							data-width-default="' . $configuration['defaultWidth'] . '"
 							data-height-default="' . $configuration['defaultHeight'] . '"
@@ -65,6 +67,7 @@ class InlineControlButtonUtility
 							data-placeholder-default="' . $configuration['defaultText'] . '"
 							data-bgcolor-default="' . $configuration['defaultBGColor'] . '"
 							data-textcolor-default="' . $configuration['defaultTextColor'] . '"
+							data-count-default="1"
 							
 							data-btn-submit="' . $buttonSubmitText . '"
 							>
