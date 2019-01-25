@@ -32,45 +32,8 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
         var self = this;
 
         var btnSubmit = $target.data('btn-submit');
-        var testText = $target.data('online-media-allowed-help-text') || 'missing text3'; // @todo wrong text
+        var $markup = PlaceholderImages.getFormMarkup($target);
 
-        var $markup = $('<div>')
-            .attr('class', 'form-control-wrap')
-            .append([
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control width')
-                    .attr('value', $target.data('width-default'))
-                    .attr('placeholder', $target.data('width-text')),
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control height')
-                    .attr('value', $target.data('height-default'))
-                    .attr('placeholder', $target.data('height-text')),
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control format')
-                    .attr('value', $target.data('format-default'))
-                    .attr('placeholder', $target.data('format-text')),
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control placeholder')
-                    .attr('value', $target.data('placeholder-default'))
-                    .attr('placeholder', $target.data('placeholder-text')),
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control bgcolor')
-                    .attr('value', $target.data('bgcolor-default'))
-                    .attr('placeholder', $target.data('bgcolor-text')),
-                $('<input>')
-                    .attr('type', 'text')
-                    .attr('class', 'form-control textcolor')
-                    .attr('value', $target.data('textcolor-default'))
-                    .attr('placeholder', $target.data('textcolor-text')),
-                $('<div>')
-                    .attr('class', 'help-block')
-                    .html(self.securityUtility.encodeHtml(testText, false))
-            ]);
         var $modal = Modal.show(
             $target.attr('title'),
             $markup,
@@ -94,6 +57,94 @@ define(["require", "exports", "TYPO3/CMS/Backend/Enum/KeyTypes", "jquery", "npro
                 }
             }]
         );
+    };
+
+    /**
+     * @param {Object} $target
+     */
+    PlaceholderImages.getFormMarkup = function($target) {
+        var self = this;
+        var testText = $target.data('online-media-allowed-help-text') || 'missing text3'; // @todo wrong text
+
+        return $('<div>')
+            .attr('class', 'form-control-wrap')
+            .append([
+                $('<div>')
+                    .attr('class', 'row')
+                    .append([
+                        $('<div>')
+                            .attr('class', 'form-group col-sm-6')
+                            .append([
+                                PlaceholderImages.getLabel('width', $target),
+                                PlaceholderImages.getInput('width', $target)
+                            ]),
+                        $('<div>')
+                            .attr('class', 'form-group col-sm-6')
+                            .append([
+                                PlaceholderImages.getLabel('height', $target),
+                                PlaceholderImages.getInput('height', $target)
+                            ]),
+                    ]),
+                $('<div>')
+                    .attr('class', 'row')
+                    .append([
+                        $('<div>')
+                            .attr('class', 'form-group col-sm-6')
+                            .append([
+                                PlaceholderImages.getLabel('bgcolor', $target),
+                                PlaceholderImages.getInput('bgcolor', $target)
+                            ]),
+                        $('<div>')
+                            .attr('class', 'form-group col-sm-6')
+                            .append([
+                                PlaceholderImages.getLabel('textcolor', $target),
+                                PlaceholderImages.getInput('textcolor', $target)
+                            ]),
+                    ]),
+                $('<div>')
+                    .attr('class', 'row')
+                    .append([
+                        $('<div>')
+                            .attr('class', 'form-group col-sm-6')
+                            .append([
+                                PlaceholderImages.getLabel('format', $target),
+                                PlaceholderImages.getInput('format', $target)
+                            ])
+                    ]),
+                $('<div>')
+                    .attr('class', 'row')
+                    .append([
+                        $('<div>')
+                            .attr('class', 'form-group col-sm-12')
+                            .append([
+                                PlaceholderImages.getLabel('placeholder', $target),
+                                PlaceholderImages.getInput('placeholder', $target)
+                            ])
+                    ]),
+                $('<div>')
+                    .attr('class', 'help-block')
+                    .html(self.securityUtility.encodeHtml(testText, false))
+            ]);
+    };
+
+    /**
+     * @param {string} name
+     * @param {Object} $target
+     */
+    PlaceholderImages.getLabel = function(name, $target) {
+        return $('<label>').html($target.data(name + '-text'))
+    };
+
+    /**
+     * @param {string} name
+     * @param {Object} $target
+     */
+    PlaceholderImages.getInput = function(name, $target) {
+        return $('<input>')
+            .attr('type', 'text')
+            .attr('class', 'form-control ' + name)
+            .attr('value', $target.data(name + '-default'))
+            .attr('placeholder', $target.data(name + '-text'))
     };
 
     /**
