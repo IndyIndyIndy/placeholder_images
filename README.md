@@ -5,7 +5,8 @@ WORK IN PROGRESS
 
 @TODO:
 - format select options
-- placeholder count feld -> upload multiple images at once
+- colorpicker
+- placeholder count field -> upload multiple images at once
 - different options for image source:
 -- placeholder.com (done)
 -- local imagemagick generation
