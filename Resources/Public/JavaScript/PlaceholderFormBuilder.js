@@ -50,13 +50,13 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
                                 .attr('class', 'form-group col-sm-6')
                                 .append([
                                     self.getLabel('bgcolor', $target),
-                                    self.getInput('bgcolor', $target)
+                                    self.getColorPicker('bgcolor', $target)
                                 ]),
                             $('<div>')
                                 .attr('class', 'form-group col-sm-6')
                                 .append([
                                     self.getLabel('textcolor', $target),
-                                    self.getInput('textcolor', $target)
+                                    self.getColorPicker('textcolor', $target)
                                 ]),
                         ]),
                     $('<div>')
@@ -87,7 +87,12 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
                         ]),
                     $('<div>')
                         .attr('class', 'help-block')
-                        .html(self.securityUtility.encodeHtml(testText, false))
+                        .html(self.securityUtility.encodeHtml(testText, false)),
+                    $('<script>' +
+                        'requirejs(["TYPO3/CMS/Core/Contrib/jquery.minicolors"], function(minicolors) {\n' +
+                            '\$(".t3js-color-picker").minicolors({});\n' +
+                            '});' +
+                        '</script>')
                 ]);
         };
 
@@ -107,6 +112,18 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
             return $('<input>')
                 .attr('type', 'text')
                 .attr('class', 'form-control ' + name)
+                .attr('value', $target.data(name + '-default'))
+                .attr('placeholder', $target.data(name + '-text'));
+        };
+
+        /**
+         * @param {string} name
+         * @param {Object} $target
+         */
+        PlaceholderFormBuilder.getColorPicker = function(name, $target) {
+            return $('<input>')
+                .attr('type', 'text')
+                .attr('class', 'form-control hasDefaultValue t3js-clearable t3js-color-picker formengine-colorpickerelement')
                 .attr('value', $target.data(name + '-default'))
                 .attr('placeholder', $target.data(name + '-text'));
         };
