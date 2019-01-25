@@ -85,7 +85,7 @@ class PlaceholderDownloader
                         $file = $resourceFactory->getFileObject($fileIndexEntry['uid'], $fileIndexEntry);
                         break;
                     } catch(FileDoesNotExistException $e) {
-
+                        continue;
                     }
                 }
             }
