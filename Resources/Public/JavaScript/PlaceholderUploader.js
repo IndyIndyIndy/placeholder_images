@@ -43,7 +43,7 @@ define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Sev
                     trigger: function() {
                         var width = $modal.find('input.width').val();
                         var height = $modal.find('input.height').val();
-                        var format = $modal.find('input.format').val();
+                        var format = $modal.find('select.format').val();
                         var placeholder = $modal.find('input.placeholder').val();
                         var bgcolor = $modal.find('input.bgcolor').val();
                         var textcolor = $modal.find('input.textcolor').val();

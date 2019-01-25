@@ -76,7 +76,7 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
                                 .attr('class', 'form-group col-sm-6')
                                 .append([
                                     self.getLabel('format', $target),
-                                    self.getInput('format', $target)
+                                    self.getFormatSelect('format', $target)
                                 ]),
                             $('<div>')
                                 .attr('class', 'form-group col-sm-6')
@@ -96,7 +96,7 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
          * @param {Object} $target
          */
         PlaceholderFormBuilder.getLabel = function(name, $target) {
-            return $('<label>').html($target.data(name + '-text'))
+            return $('<label>').html($target.data(name + '-text'));
         };
 
         /**
@@ -108,7 +108,33 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
                 .attr('type', 'text')
                 .attr('class', 'form-control ' + name)
                 .attr('value', $target.data(name + '-default'))
-                .attr('placeholder', $target.data(name + '-text'))
+                .attr('placeholder', $target.data(name + '-text'));
+        };
+
+        /**
+         * @param {string} name
+         * @param {Object} $target
+         */
+        PlaceholderFormBuilder.getFormatSelect = function(name, $target) {
+            var self = this;
+            var defaultValue = $target.data(name + '-default');
+
+            return $('<select>')
+                .attr('class', 'form-control ' + name)
+                .append([
+                    self.getOption('png', defaultValue),
+                    self.getOption('jpg', defaultValue),
+                    self.getOption('gif', defaultValue),
+                ]);
+        };
+
+        /**
+         * @param {string} value
+         * @param {string} defaultValue
+         */
+        PlaceholderFormBuilder.getOption = function(value, defaultValue) {
+            var selected = (value === defaultValue);
+            return '<option value"'+value+'" ' + selected + '>'+value+'</option>';
         };
 
         return PlaceholderFormBuilder;

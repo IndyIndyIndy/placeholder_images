@@ -4,7 +4,6 @@ Easily add placeholder images in TYPO3 using placeholder.com.
 WORK IN PROGRESS
 
 @TODO:
-- format select options
 - colorpicker
 - count integer only - minval 1, maxval ?
 - text in modal

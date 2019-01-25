@@ -79,7 +79,6 @@ class PlaceholderController
     protected function getFile($imageSettings, $targetFolderIdentifier)
     {
         $placeholderDownloader = GeneralUtility::makeInstance(PlaceholderDownloader::class);
-        $placeholderDownloader->getFile($imageSettings, $targetFolderIdentifier);
         return $placeholderDownloader->getFile($imageSettings, $targetFolderIdentifier);
     }
 
