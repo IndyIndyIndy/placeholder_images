@@ -12,9 +12,7 @@ namespace ChristianEssl\PlaceholderImages\Utility;
  *
  ***/
 
-use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 
 /**
  * Checks the extension configuration
@@ -38,8 +36,12 @@ class ConfigurationUtility
     public static function getExtensionConfiguration() : array
     {
         try {
-            return GeneralUtility::makeInstance(ExtensionConfiguration::class)
-                ->get('placeholder_images');
+            if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 9000000) {
+                return GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+                    ->get('placeholder_images');
+            } else {
+                return unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['placeholder_images']);
+            }
         } catch (\TYPO3\CMS\Core\Exception $e) {
             return [];
         }
