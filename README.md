@@ -63,4 +63,9 @@ Initially after installing the extension, the new button will only show up if TY
 - **customSourceUrl** 
     - If you want to connect your own image generation service, place the url here in a format like:
         - //source-example.local/?width={width}&height={height}&bgcolor={bgcolor}&textcolor={textcolor}&format={format}&text={text}
-        
+
+## 3. Usage
+
+Create a new content element like *Text / Media* and enjoy adding a few placeholder images.      
+
+![Placeholder frontend](/Resources/Public/Screenshots/placeholder_frontend.png)
