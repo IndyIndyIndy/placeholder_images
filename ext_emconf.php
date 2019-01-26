@@ -6,7 +6,7 @@
 
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Placeholder Images',
-    'description' => 'Easily add placeholder images in TYPO3 using placeholder.com.',
+    'description' => 'Easily add placeholder images in TYPO3 using either external sources (like placeholder.com) or generating them on the fly.',
     'category' => 'misc',
     'author' => 'Christian Eßl',
     'author_email' => 'indy.essl@gmail.com',
@@ -14,7 +14,7 @@ $EM_CONF[$_EXTKEY] = [
     'uploadfolder' => 0,
     'createDirs' => '',
     'clearCacheOnLoad' => 0,
-    'version' => '0.4.0',
+    'version' => '1.0.0',
     'constraints' => [
         'depends' => [
             'typo3' => '8.7.0-9.5.99',

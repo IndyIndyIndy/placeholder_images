@@ -1,7 +1,7 @@
 {
     "name": "christianessl/placeholder_images",
     "type": "typo3-cms-extension",
-    "description": "Easily add placeholder images in TYPO3 using placeholder.com.",
+    "description": "Easily add placeholder images in TYPO3 using either external sources (like placeholder.com) or generating them on the fly.",
     "keywords": [
         "TYPO3",
         "extension",
@@ -17,7 +17,7 @@
             "role": "Developer"
         }
     ],
-    "version": "0.4.0",
+    "version": "1.0.0",
     "require": {
         "typo3/cms-core": "^8.7.0|| ^9.5.0"
     },
