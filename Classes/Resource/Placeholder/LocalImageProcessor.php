@@ -67,9 +67,7 @@ class LocalImageProcessor extends AbstractProcessor
     {
         $fileName = $this->getFileName($imageSettings);
         $image = $this->generateImage($imageSettings);
-
-        // @todo validate if image is an acutal image
-
+        
         return $this->getFile($image, $fileName, $targetFolderIdentifier);
     }
 

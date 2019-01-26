@@ -48,11 +48,29 @@ abstract class AbstractProcessor
         if (!$file) {
             $temporaryFile = GeneralUtility::tempnam('placeholder_image');
             GeneralUtility::writeFileToTypo3tempDir($temporaryFile, $image);
+
+            if (!$this->isValidImage($temporaryFile)) {
+                GeneralUtility::unlink_tempfile($temporaryFile);
+                return null;
+            }
+
             $file = $targetFolder->addFile($temporaryFile, $fileName, DuplicationBehavior::RENAME);
             GeneralUtility::unlink_tempfile($temporaryFile);
         }
 
         return $file;
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return bool
+     */
+    protected function isValidImage($filePath) : bool
+    {
+        return exif_imagetype($filePath) == IMAGETYPE_GIF ||
+            exif_imagetype($filePath) == IMAGETYPE_PNG ||
+            exif_imagetype($filePath) == IMAGETYPE_JPEG;
     }
 
     /**
@@ -68,6 +86,10 @@ abstract class AbstractProcessor
 
         $file = null;
         $fileHash = sha1($image);
+
+        if (!$image) {
+            return $file;
+        }
 
         $files = $fileIndexRepository->findByContentHash($fileHash);
         if (!empty($files)) {

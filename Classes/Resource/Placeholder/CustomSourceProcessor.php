@@ -36,8 +36,6 @@ class CustomSourceProcessor extends AbstractProcessor
         $url = $this->setUrlParameters($configuration['customSourceUrl'], $imageSettings);
         $image = GeneralUtility::getUrl($url);
 
-        // @todo validate if image is an acutal image
-
         return $this->getFile($image, $fileName, $targetFolderIdentifier);
     }
 
