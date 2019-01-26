@@ -14,7 +14,6 @@ namespace ChristianEssl\PlaceholderImages\Resource\Placeholder;
 
 use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
 use TYPO3\CMS\Core\Resource\File;
-use TYPO3\CMS\Core\Utility\Exception\NotImplementedMethodException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

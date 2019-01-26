@@ -118,7 +118,7 @@ define(["jquery"],
         /**
          * @param {string} name
          * @param {Object} $target
-         * @param {int} $target
+         * @param {int} max
          *
          * @return Object
          */

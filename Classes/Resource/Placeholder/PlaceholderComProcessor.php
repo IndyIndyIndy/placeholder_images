@@ -32,6 +32,9 @@ class PlaceholderComProcessor extends AbstractProcessor
         $fileName = $this->getFileName($imageSettings);
         $url = $this->buildPlaceholderDotComURL($imageSettings);
         $image = GeneralUtility::getUrl($url);
+
+        // @todo validate if image is an acutal image
+
         return $this->getFile($image, $fileName, $targetFolderIdentifier);
     }
 

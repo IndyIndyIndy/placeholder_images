@@ -46,7 +46,7 @@ abstract class AbstractProcessor
         $file = $this->findExistingFileForImage($image, $targetFolder);
 
         if (!$file) {
-            $temporaryFile = GeneralUtility::tempnam('placehoder_image');
+            $temporaryFile = GeneralUtility::tempnam('placeholder_image');
             GeneralUtility::writeFileToTypo3tempDir($temporaryFile, $image);
             $file = $targetFolder->addFile($temporaryFile, $fileName, DuplicationBehavior::RENAME);
             GeneralUtility::unlink_tempfile($temporaryFile);

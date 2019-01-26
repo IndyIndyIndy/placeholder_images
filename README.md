@@ -6,6 +6,6 @@ WORK IN PROGRESS
 @TODO:
 - tests in TYPO 8.7
 - better alternative to the ugly xclassing of InlineControlContainer?
-- remove any console.log, var_dump and @todos, unused class uses
+- handle @todo markings
 - write readme and doc (with nice images)
 - packagist
