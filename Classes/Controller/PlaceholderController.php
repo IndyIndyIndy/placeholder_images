@@ -19,7 +19,6 @@ use ChristianEssl\PlaceholderImages\Resource\Placeholder\PlaceholderComProcessor
 use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -32,10 +31,11 @@ class PlaceholderController
      * AJAX endpoint for creating an image and storing it as a sys_file record
      *
      * @param ServerRequestInterface $request
+     * @param ResponseInterface $response
      *
      * @return ResponseInterface
      */
-    public function createAction(ServerRequestInterface $request): ResponseInterface
+    public function createAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $targetFolderIdentifier = $request->getParsedBody()['targetFolder'];
         $width = (int) $request->getParsedBody()['width'];
@@ -73,9 +73,13 @@ class PlaceholderController
             } catch (InvalidConfigurationException $e) {
                 $data['error'] = $this->getTranslation('tx_placeholderimages.image.error.invalid_configuration');
             }
-            return new JsonResponse($data);
+            $response->getBody()->write(json_encode($data));
+            return $response;
         }
-        return new JsonResponse(['error' => $this->getTranslation('tx_placeholderimages.image.error.empty_request')]);
+        $response->getBody()->write(json_encode([
+            'error' => $this->getTranslation('tx_placeholderimages.image.error.empty_request')
+        ]));
+        return $response;
     }
 
     /**
