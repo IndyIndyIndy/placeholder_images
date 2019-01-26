@@ -9,21 +9,19 @@
  *
  ***/
 
-define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
-    function($, SecurityUtility) {
+define(["jquery"],
+    function($) {
         "use strict";
 
-        var PlaceholderFormBuilder = {
-            securityUtility: new SecurityUtility()
+        var FormBuilder = {
+
         };
+        var self = FormBuilder;
 
         /**
          * @param {Object} $target
          */
-        PlaceholderFormBuilder.getFormMarkup = function($target) {
-            var self = this;
-            var testText = $target.data('online-media-allowed-help-text') || 'missing text3'; // @todo wrong text
-
+        FormBuilder.getFormMarkup = function($target) {
             return $('<div>')
                 .attr('class', 'form-control-wrap')
                 .append([
@@ -85,9 +83,6 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
                                     self.getNumberInput('count', $target, 10)
                                 ])
                         ]),
-                    $('<div>')
-                        .attr('class', 'help-block')
-                        .html(self.securityUtility.encodeHtml(testText, false)),
                     $(  '<script>' +
                         '   requirejs(["TYPO3/CMS/PlaceholderImages/ModalValidation"], function(ModalValidation) {' +
                         '       ModalValidation.init();' +
@@ -102,7 +97,7 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
          *
          * @return Object
          */
-        PlaceholderFormBuilder.getLabel = function(name, $target) {
+        FormBuilder.getLabel = function(name, $target) {
             return $('<label>').html($target.data(name + '-text'));
         };
 
@@ -112,7 +107,7 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
          *
          * @return Object
          */
-        PlaceholderFormBuilder.getTextInput = function(name, $target) {
+        FormBuilder.getTextInput = function(name, $target) {
             return $('<input>')
                 .attr('type', 'text')
                 .attr('class', 'form-control ' + name)
@@ -127,7 +122,7 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
          *
          * @return Object
          */
-        PlaceholderFormBuilder.getNumberInput = function(name, $target, max) {
+        FormBuilder.getNumberInput = function(name, $target, max) {
             return $('<input>')
                 .attr('type', 'number')
                 .attr('min', 1)
@@ -143,7 +138,7 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
          *
          * @return Object
          */
-        PlaceholderFormBuilder.getColorPicker = function(name, $target) {
+        FormBuilder.getColorPicker = function(name, $target) {
             return $('<input>')
                 .attr('type', 'text')
                 .attr('class', 'form-control t3js-color-picker formengine-colorpickerelement')
@@ -157,8 +152,7 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
          *
          * @return Object
          */
-        PlaceholderFormBuilder.getFormatSelect = function(name, $target) {
-            var self = this;
+        FormBuilder.getFormatSelect = function(name, $target) {
             var defaultValue = $target.data(name + '-default');
 
             return $('<select>')
@@ -176,10 +170,10 @@ define(["jquery", "TYPO3/CMS/Core/SecurityUtility"],
          *
          * @return string
          */
-        PlaceholderFormBuilder.getOption = function(value, defaultValue) {
+        FormBuilder.getOption = function(value, defaultValue) {
             var selected = (value === defaultValue);
             return '<option value"'+value+'" ' + selected + '>'+value+'</option>';
         };
 
-        return PlaceholderFormBuilder;
+        return FormBuilder;
 });

@@ -9,17 +9,16 @@
  *
  ***/
 
-define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Severity", "TYPO3/CMS/PlaceholderImages/PlaceholderFormBuilder"],
+define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Severity", "TYPO3/CMS/PlaceholderImages/FormBuilder"],
     function($, NProgress, Modal, Severity, FormBuilder) {
     "use strict";
 
         var PlaceholderUploader = {
             formBuilder: FormBuilder
         };
+        var self = PlaceholderUploader;
 
         PlaceholderUploader.init = function() {
-            var self = this;
-
             $(document).on('click', '.t3js-placeholder-add-btn', function (e) {
                 self.triggerModal($(e.currentTarget));
             });
@@ -29,8 +28,6 @@ define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Sev
          * @param {Object} $target
          */
         PlaceholderUploader.triggerModal = function($target) {
-            var self = this;
-
             var $form = self.formBuilder.getFormMarkup($target);
             var $modal = Modal.show(
                 $target.attr('title'),
