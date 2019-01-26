@@ -146,9 +146,9 @@ class PlaceholderDownloader
 
         // colors
         if (isset($settings['bgcolor']) && isset($settings['textcolor'])) {
-            $bcolor = str_replace('#', '', $settings['bgcolor']);
+            $bgcolor = str_replace('#', '', $settings['bgcolor']);
             $textcolor = str_replace('#', '', $settings['textcolor']);
-            $url .= '/' . $bcolor . '/'.$textcolor;
+            $url .= '/' . $bgcolor . '/'.$textcolor;
         }
 
         // file extension

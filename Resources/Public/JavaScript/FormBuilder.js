@@ -141,7 +141,7 @@ define(["jquery"],
         FormBuilder.getColorPicker = function(name, $target) {
             return $('<input>')
                 .attr('type', 'text')
-                .attr('class', 'form-control t3js-color-picker formengine-colorpickerelement')
+                .attr('class', 'form-control t3js-color-picker formengine-colorpickerelement ' + name)
                 .attr('value', $target.data(name + '-default'))
                 .attr('placeholder', $target.data(name + '-text'));
         };
