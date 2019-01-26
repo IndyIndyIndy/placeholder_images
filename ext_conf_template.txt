@@ -22,3 +22,7 @@ defaultTextColor = #a9a9a9
 
 # cat=basic//; type=options[placeholder.com,imagemagick,custom]; label=Image source
 imageSource = placeholder.com
+
+# cat=basic//; type=string; label=Url to the custom image source, if configured
+customSourceUrl = //source-example.local/?width={width}&height={height}&bgcolor={bgcolor}&textcolor={textcolor}&format={format}&text={text}
+

@@ -31,18 +31,8 @@ class PlaceholderComProcessor extends AbstractProcessor
     {
         $fileName = $this->getFileName($imageSettings);
         $url = $this->buildPlaceholderDotComURL($imageSettings);
-        $image = $this->downloadImage($url);
+        $image = GeneralUtility::getUrl($url);
         return $this->getFile($image, $fileName, $targetFolderIdentifier);
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return string
-     */
-    protected function downloadImage($url) : string
-    {
-        return GeneralUtility::getUrl($url);
     }
 
     /**
