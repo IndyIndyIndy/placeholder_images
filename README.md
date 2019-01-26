@@ -4,10 +4,12 @@ Easily add placeholder images in TYPO3 using either external sources (like place
 ## What does it do?
 
 This extensions adds a button "Add placeholder image" to content elements and other data records using FAL media fields in the TYPO3 Backend. 
-This makes it easy to quickly add a few generated placeholder images for prototyping.
+This makes it easy to quickly add a few generated placeholder images for prototyping. Support uploading multiple placeholders images at once.
 
 ![Add placeholder image Button](/Resources/Public/Screenshots/placeholder_button.png)
-![Add placeholder image Button](/Resources/Public/Screenshots/placeholder_modal.png)
+
+
+![Placeholder modal](/Resources/Public/Screenshots/placeholder_modal.png)
 
 ## Requirements
 
@@ -62,6 +64,3 @@ Initially after installing the extension, the new button will only show up if TY
     - If you want to connect your own image generation service, place the url here in a format like:
         - //source-example.local/?width={width}&height={height}&bgcolor={bgcolor}&textcolor={textcolor}&format={format}&text={text}
         
-@TODO:
-- better alternative to the ugly xclassing of InlineControlContainer?
-- packagist
