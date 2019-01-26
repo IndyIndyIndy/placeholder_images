@@ -84,7 +84,6 @@ class InlineControlButtonUtility
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/PlaceholderImages/PlaceholderUploader', 'function(PlaceholderUploader) {
 			PlaceholderUploader.init();
 		}');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/PlaceholderImages/PlaceholderFormBuilder');
     }
 
     /**

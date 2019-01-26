@@ -10,11 +10,11 @@
  ***/
 
 define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Severity", "TYPO3/CMS/PlaceholderImages/PlaceholderFormBuilder"],
-    function($, NProgress, Modal, Severity, PlaceholderFormBuilder) {
+    function($, NProgress, Modal, Severity, FormBuilder) {
     "use strict";
 
         var PlaceholderUploader = {
-            placeholderFormBuilder: PlaceholderFormBuilder
+            formBuilder: FormBuilder
         };
 
         PlaceholderUploader.init = function() {
@@ -31,7 +31,7 @@ define(["jquery", "nprogress", "TYPO3/CMS/Backend/Modal", "TYPO3/CMS/Backend/Sev
         PlaceholderUploader.triggerModal = function($target) {
             var self = this;
 
-            var $form = self.placeholderFormBuilder.getFormMarkup($target);
+            var $form = self.formBuilder.getFormMarkup($target);
             var $modal = Modal.show(
                 $target.attr('title'),
                 $form,
