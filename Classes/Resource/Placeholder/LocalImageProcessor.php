@@ -130,6 +130,10 @@ class LocalImageProcessor extends AbstractProcessor
         $this->imageWidth = $imageSettings['width'];
         $this->imageHeight = $imageSettings['height'];
         $this->text = $imageSettings['placeholder'];
+
+        if (strlen($this->text) == 0) {
+            $this->text = $this->imageWidth . 'x' . $this->imageHeight;
+        }
     }
 
     /**
