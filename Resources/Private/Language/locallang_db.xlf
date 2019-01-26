@@ -28,7 +28,7 @@
 				<source>Text color</source>
 			</trans-unit>
 			<trans-unit id="tx_placeholderimages.image.count">
-				<source>Anzahl</source>
+				<source>Count</source>
 			</trans-unit>
 
 			<trans-unit id="tx_placeholderimages.image.error.unknown_error">
