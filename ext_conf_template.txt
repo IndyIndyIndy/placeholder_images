@@ -19,3 +19,6 @@ defaultBGColor = #d7d7d7
 
 # cat=basic//; type=color; label=Default background color
 defaultTextColor = #a9a9a9
+
+# cat=basic//; type=options[placeholder.com,imagemagick,custom]; label=Image source
+imageSource = placeholder.com

@@ -34,6 +34,9 @@
 			<trans-unit id="tx_placeholderimages.image.error.unknown_error">
 				<source>An unknown error occured generating the image.</source>
 			</trans-unit>
+			<trans-unit id="tx_placeholderimages.image.error.invalid_configuration">
+				<source>Invalid extension configuration.</source>
+			</trans-unit>
 			<trans-unit id="tx_placeholderimages.image.error.empty_request">
 				<source>The request was empty.</source>
 			</trans-unit>

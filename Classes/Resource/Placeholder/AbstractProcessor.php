@@ -1,5 +1,5 @@
 <?php
-namespace ChristianEssl\PlaceholderImages\File;
+namespace ChristianEssl\PlaceholderImages\Resource\Placeholder;
 
 /***
  *
@@ -20,9 +20,9 @@ use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Download the placeholder and add it to FAL
+ * Abstract class for processing placeholder images
  */
-class PlaceholderDownloader
+abstract class AbstractProcessor
 {
 
     /**
@@ -31,16 +31,21 @@ class PlaceholderDownloader
      *
      * @return File|null
      */
-    public function getFile($imageSettings, $targetFolderIdentifier)
+    abstract public function processFile($imageSettings, $targetFolderIdentifier);
+
+    /**
+     * @param string $image
+     * @param string $fileName
+     * @param string $targetFolderIdentifier
+     *
+     * @return File|null
+     */
+    public function getFile($image, $fileName, $targetFolderIdentifier)
     {
         $targetFolder = $this->getTargetFolder($targetFolderIdentifier);
-        $url = $this->buildPlaceholderDotComURL($imageSettings);
-        $image = $this->downloadImage($url);
-
         $file = $this->findExistingFileForImage($image, $targetFolder);
 
         if (!$file) {
-            $fileName = $this->getFileName($imageSettings);
             $temporaryFile = GeneralUtility::tempnam('placehoder_image');
             GeneralUtility::writeFileToTypo3tempDir($temporaryFile, $image);
             $file = $targetFolder->addFile($temporaryFile, $fileName, DuplicationBehavior::RENAME);
@@ -48,16 +53,6 @@ class PlaceholderDownloader
         }
 
         return $file;
-    }
-
-    /**
-     * @param string $url
-     *
-     * @return string
-     */
-    protected function downloadImage($url) : string
-    {
-        return GeneralUtility::getUrl($url);
     }
 
     /**
@@ -127,41 +122,6 @@ class PlaceholderDownloader
         }
         $fileName = $title . ' ' . $settings['width'] . 'x' . $settings['height'];
         return $fileName . '.' . $settings['format'];
-    }
-
-    /**
-     * @param array $settings
-     *
-     * @return string
-     */
-    protected function buildPlaceholderDotComURL($settings) : string
-    {
-        $scheme = GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://';
-        $url = $scheme.'via.placeholder.com/';
-
-        // dimensions
-        $width = $settings['width'];
-        $height = $settings['height'];
-        $url .= $width . 'x' . $height;
-
-        // colors
-        if (isset($settings['bgcolor']) && isset($settings['textcolor'])) {
-            $bgcolor = str_replace('#', '', $settings['bgcolor']);
-            $textcolor = str_replace('#', '', $settings['textcolor']);
-            $url .= '/' . $bgcolor . '/'.$textcolor;
-        }
-
-        // file extension
-        if (isset($settings['format'])) {
-            $url .= '.' . $settings['format'];
-        }
-
-        // file extension
-        if (isset($settings['placeholder']) && strlen($settings['placeholder']) > 0) {
-            $url .= '?text=' . urlencode($settings['placeholder']);
-        }
-
-        return $url;
     }
 
 }

@@ -12,12 +12,17 @@ namespace ChristianEssl\PlaceholderImages\Controller;
  *
  ***/
 
-use ChristianEssl\PlaceholderImages\File\PlaceholderDownloader;
+use ChristianEssl\PlaceholderImages\Exception\InvalidConfigurationException;
+use ChristianEssl\PlaceholderImages\Resource\Placeholder\CustomSourceProcessor;
+use ChristianEssl\PlaceholderImages\Resource\Placeholder\ImagemagickProcessor;
+use ChristianEssl\PlaceholderImages\Resource\Placeholder\PlaceholderComProcessor;
+use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Handles generating and uploading placeholder images
@@ -59,11 +64,15 @@ class PlaceholderController
 
         if (!empty($width)) {
             $data = [];
-            $file = $this->getFile($imageSettings, $targetFolderIdentifier);
-            if ($file !== null) {
-                $data['file'] = $file->getUid();
-            } else {
-                $data['error'] = $this->getTranslation('tx_placeholderimages.image.error.unknown_error');
+            try {
+                $file = $this->getFile($imageSettings, $targetFolderIdentifier);
+                if ($file !== null) {
+                    $data['file'] = $file->getUid();
+                } else {
+                    $data['error'] = $this->getTranslation('tx_placeholderimages.image.error.unknown_error');
+                }
+            } catch (InvalidConfigurationException $e) {
+                $data['error'] = $this->getTranslation('tx_placeholderimages.image.error.invalid_configuration');
             }
             return new JsonResponse($data);
         }
@@ -74,12 +83,29 @@ class PlaceholderController
      * @param array $imageSettings
      * @param string $targetFolderIdentifier
      *
+     * @throws InvalidConfigurationException
      * @return File|null
      */
     protected function getFile($imageSettings, $targetFolderIdentifier)
     {
-        $placeholderDownloader = GeneralUtility::makeInstance(PlaceholderDownloader::class);
-        return $placeholderDownloader->getFile($imageSettings, $targetFolderIdentifier);
+        $configuration = ConfigurationUtility::getExtensionConfiguration();
+
+        switch ($configuration['imageSource']) {
+            case 'placeholder.com':
+                $processorClassName = PlaceholderComProcessor::class;
+                break;
+            case 'imagemagick':
+                $processorClassName = ImagemagickProcessor::class;
+                break;
+            case 'custom':
+                $processorClassName = CustomSourceProcessor::class;
+                break;
+            default:
+                throw new InvalidConfigurationException('Invalid image source configuration!');
+        }
+
+        $processor = GeneralUtility::makeInstance($processorClassName);
+        return $processor->processFile($imageSettings, $targetFolderIdentifier);
     }
 
     /**
