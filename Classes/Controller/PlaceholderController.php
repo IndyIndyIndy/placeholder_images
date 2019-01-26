@@ -14,7 +14,7 @@ namespace ChristianEssl\PlaceholderImages\Controller;
 
 use ChristianEssl\PlaceholderImages\Exception\InvalidConfigurationException;
 use ChristianEssl\PlaceholderImages\Resource\Placeholder\CustomSourceProcessor;
-use ChristianEssl\PlaceholderImages\Resource\Placeholder\ImagemagickProcessor;
+use ChristianEssl\PlaceholderImages\Resource\Placeholder\LocalImageProcessor;
 use ChristianEssl\PlaceholderImages\Resource\Placeholder\PlaceholderComProcessor;
 use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
 use Psr\Http\Message\ResponseInterface;
@@ -22,7 +22,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Handles generating and uploading placeholder images
@@ -95,7 +94,7 @@ class PlaceholderController
                 $processorClassName = PlaceholderComProcessor::class;
                 break;
             case 'imagemagick':
-                $processorClassName = ImagemagickProcessor::class;
+                $processorClassName = LocalImageProcessor::class;
                 break;
             case 'custom':
                 $processorClassName = CustomSourceProcessor::class;
