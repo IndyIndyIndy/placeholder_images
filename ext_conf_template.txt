@@ -3,10 +3,10 @@
 typo3Contexts = Development
 
 # cat=basic//; type=int+; label=Default image width
-defaultWidth =
+defaultWidth = 1024
 
 # cat=basic//; type=int+; label=Default image height (width, if empty)
-defaultHeight =
+defaultHeight = 768
 
 # cat=basic//; type=options[png,jpg,gif]; label=Default image format
 defaultFormat = png
