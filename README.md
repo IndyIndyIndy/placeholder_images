@@ -13,7 +13,7 @@ This makes it easy to quickly add a few generated placeholder images for prototy
 
 ## Requirements
 
-Currently support TYPO3 8.7 and 9.5 LTS
+Currently supports TYPO3 8.7 and 9.5 LTS
 
 ## 1. Installation
 
