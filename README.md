@@ -21,9 +21,13 @@ Currently support TYPO3 8.7 and 9.5 LTS
 
 `composer require christianessl/placeholder_images`. 
 
+Clear caches and reload the backend for all changes to take effect.
+
 ### Installation with TER
 
 Open the TYPO3 Extension Manager, search for `placeholder_images` and install the extension.
+
+Clear caches and reload the backend for all changes to take effect.
 
 ## 2. Configuration
 
