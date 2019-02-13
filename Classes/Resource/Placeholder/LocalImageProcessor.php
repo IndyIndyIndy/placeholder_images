@@ -12,6 +12,7 @@ namespace ChristianEssl\PlaceholderImages\Resource\Placeholder;
  *
  ***/
 
+use Doctrine\Common\Util\Debug;
 use TYPO3\CMS\Core\Imaging\GraphicalFunctions;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -203,8 +204,10 @@ class LocalImageProcessor extends AbstractProcessor
     protected function getTextOffset($fontFile, $fontSize) : array
     {
         $textSize = imagettfbbox($fontSize, 0, $fontFile, $this->text);
-        $x = $textSize[0] + ($this->imageWidth / 2) - ($textSize[4] / 2);
-        $y = $textSize[1] + ($this->imageHeight / 2) - ($textSize[5] / 2);
+
+        $x = floor(($this->imageWidth - $textSize[4]) / 2);
+        $y = floor(($this->imageHeight - $textSize[5]) / 2);
+
         return [$x, $y];
     }
 }
