@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection ALL */
+
 namespace ChristianEssl\PlaceholderImages\Xclass;
 
 /***
@@ -29,6 +30,8 @@ class InlineControlContainerVersion9 extends \TYPO3\CMS\Backend\Form\Container\I
     /**
      * Generate a link that opens an element browser in a new window.
      * For group/db there is no way to use a "selector" like a <select>|</select>-box.
+     *
+     * @SuppressWarnings("sonar")
      *
      * @param array $inlineConfiguration TCA inline configuration of the parent(!) field
      * @return string A HTML link that opens an element browser in a new window

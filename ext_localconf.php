@@ -1,9 +1,12 @@
 <?php
+/** @noinspection PhpUndefinedVariableInspection */
+/** @noinspection PhpUnusedParameterInspection */
 
 defined('TYPO3_MODE') || die('Access denied.');
 
 call_user_func(
-    function ($extKey) {
+    function (
+        $extKey) {
 
         if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 9000000) {
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\TYPO3\CMS\Backend\Form\Container\InlineControlContainer::class] = array(

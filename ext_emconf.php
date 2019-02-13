@@ -4,6 +4,7 @@
  * Extension Manager/Repository config file for ext: "placeholder_images"
  ***************************************************************/
 
+/** @noinspection PhpUndefinedVariableInspection */
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Placeholder Images',
     'description' => 'Easily add placeholder images in TYPO3 using either external sources (like placeholder.com) or generating them on the fly.',
