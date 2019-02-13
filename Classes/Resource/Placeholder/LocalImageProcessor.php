@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Imaging\GraphicalFunctions;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Generate the placeholder locally
@@ -156,19 +157,41 @@ class LocalImageProcessor extends AbstractProcessor
     protected function getFontSize($fontFile) : int
     {
         $size = 10;
+        $horizontalMarginModifier = 0.85;
+        $verticalMarginModifier = 0.35;
 
         for($i = 999; $i > 0; $i--) {
             $textSize = imagettfbbox($i, 0, $fontFile, $this->text);
             if(
-                (abs($textSize[2] - $textSize[0]) < $this->imageWidth) &&
-                (abs($textSize[7] - $textSize[1]) < $this->imageHeight)
+                ($this->getTextWidth($textSize) < $this->imageWidth * $horizontalMarginModifier) &&
+                ($this->getTextHeight($textSize) < $this->imageHeight * $verticalMarginModifier)
             ) {
-                $size = round($i * 0.85);
+                $size = round($i);
                 break;
             }
         }
 
         return $size;
+    }
+
+    /**
+     * @param $textSize
+     *
+     * @return int
+     */
+    protected function getTextWidth($textSize) : int
+    {
+        return abs($textSize[2] - $textSize[0]);
+    }
+
+    /**
+     * @param $textSize
+     *
+     * @return int
+     */
+    protected function getTextHeight($textSize) : int
+    {
+        return abs($textSize[7] - $textSize[1]);
     }
 
     /**
