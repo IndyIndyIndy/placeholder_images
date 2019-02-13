@@ -158,7 +158,7 @@ class LocalImageProcessor extends AbstractProcessor
     protected function getFontSize($fontFile) : int
     {
         $size = 10;
-        $horizontalMarginModifier = 0.85;
+        $horizontalMarginModifier = 0.75;
         $verticalMarginModifier = 0.35;
 
         for($i = 999; $i > 0; $i--) {
