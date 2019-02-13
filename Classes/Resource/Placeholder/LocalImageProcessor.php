@@ -108,6 +108,7 @@ class LocalImageProcessor extends AbstractProcessor
                 imagejpeg($image);
                 break;
             case 'gif':
+            default:
                 imagegif($image);
                 break;
         }
