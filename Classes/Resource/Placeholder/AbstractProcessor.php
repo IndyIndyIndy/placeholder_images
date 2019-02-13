@@ -26,12 +26,12 @@ abstract class AbstractProcessor
 {
 
     /**
-     * @param array $imageSettings
+     * @param ImageSettings $imageSettings
      * @param string $targetFolderIdentifier
      *
      * @return File|null
      */
-    abstract public function processFile($imageSettings, $targetFolderIdentifier);
+    abstract public function processFile(ImageSettings $imageSettings, $targetFolderIdentifier);
 
     /**
      * @param string $image
@@ -145,18 +145,18 @@ abstract class AbstractProcessor
     }
 
     /**
-     * @param array $settings
+     * @param ImageSettings $settings
      *
      * @return string
      */
-    protected function getFileName($settings) : string
+    protected function getFileName(ImageSettings $settings) : string
     {
         $title = 'placeholder';
-        if (isset($settings['placeholder']) && strlen($settings['placeholder']) > 0) {
-            $title = $settings['placeholder'];
+        if (strlen($settings->getPlaceholder()) > 0) {
+            $title = $settings->getPlaceholder();
         }
-        $fileName = $title . ' ' . $settings['width'] . 'x' . $settings['height'];
-        return $fileName . '.' . $settings['format'];
+        $fileName = $title . ' ' . $settings->getWidth() . 'x' . $settings->getHeight();
+        return $fileName . '.' . $settings->getFormat();
     }
 
 }

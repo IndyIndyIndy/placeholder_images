@@ -23,12 +23,12 @@ class CustomSourceProcessor extends AbstractProcessor
 {
 
     /**
-     * @param array $imageSettings
+     * @param ImageSettings $imageSettings
      * @param string $targetFolderIdentifier
      *
      * @return File|null
      */
-    public function processFile($imageSettings, $targetFolderIdentifier)
+    public function processFile(ImageSettings $imageSettings, $targetFolderIdentifier)
     {
         $configuration = ConfigurationUtility::getExtensionConfiguration();
 
@@ -41,11 +41,11 @@ class CustomSourceProcessor extends AbstractProcessor
 
     /**
      * @param string $urlTemplate
-     * @param array $settings
+     * @param ImageSettings $settings
      *
      * @return string
      */
-    protected function setUrlParameters($urlTemplate, $settings) : string
+    protected function setUrlParameters($urlTemplate, ImageSettings $settings) : string
     {
         return str_replace([
             '{width}',
@@ -55,12 +55,12 @@ class CustomSourceProcessor extends AbstractProcessor
             '{format}',
             '{text}',
         ], [
-            $settings['width'],
-            $settings['height'],
-            str_replace('#', '', $settings['bgcolor']),
-            str_replace('#', '', $settings['textcolor']),
-            $settings['format'],
-            urlencode($settings['placeholder']),
+            $settings->getWidth(),
+            $settings->getHeight(),
+            str_replace('#', '', $settings->getBgColor()),
+            str_replace('#', '', $settings->getTextColor()),
+            $settings->getFormat(),
+            urlencode($settings->getPlaceholder()),
         ], $urlTemplate);
     }
 }

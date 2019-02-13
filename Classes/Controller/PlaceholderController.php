@@ -16,6 +16,7 @@ use ChristianEssl\PlaceholderImages\Exception\InvalidConfigurationException;
 use ChristianEssl\PlaceholderImages\Exception\MissingArgumentsException;
 use ChristianEssl\PlaceholderImages\Resource\Placeholder\AbstractProcessor;
 use ChristianEssl\PlaceholderImages\Resource\Placeholder\CustomSourceProcessor;
+use ChristianEssl\PlaceholderImages\Resource\Placeholder\ImageSettings;
 use ChristianEssl\PlaceholderImages\Resource\Placeholder\LocalImageProcessor;
 use ChristianEssl\PlaceholderImages\Resource\Placeholder\PlaceholderComProcessor;
 use ChristianEssl\PlaceholderImages\Utility\ConfigurationUtility;
@@ -41,7 +42,7 @@ class PlaceholderController
     public function createAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $targetFolderIdentifier = $request->getParsedBody()['targetFolder'];
-        $imageSettings = $this->getImageSettings($request);
+        $imageSettings = new ImageSettings($request);
         $data = [];
 
         try {
@@ -71,34 +72,7 @@ class PlaceholderController
     }
 
     /**
-     * @param ServerRequestInterface $request
-     *
-     * @return string[]
-     */
-    protected function getImageSettings(ServerRequestInterface $request) : array
-    {
-        $width = (int) $request->getParsedBody()['width'];
-        $height = (int) $request->getParsedBody()['height'];
-
-        if (!$width) {
-            $width = $height;
-        }
-        if (!$height) {
-            $height = $width;
-        }
-
-        return [
-            'width' => $width,
-            'height' => $height,
-            'format' => $request->getParsedBody()['format'],
-            'placeholder' => $request->getParsedBody()['placeholder'],
-            'bgcolor' => $request->getParsedBody()['bgcolor'],
-            'textcolor' => $request->getParsedBody()['textcolor'],
-        ];
-    }
-
-    /**
-     * @param array $imageSettings
+     * @param ImageSettings $imageSettings
      * @param string $targetFolderIdentifier
      *
      * @return File|null
@@ -106,9 +80,9 @@ class PlaceholderController
      * @throws InvalidConfigurationException
      * @throws FileDoesNotExistException
      */
-    protected function getFile($imageSettings, $targetFolderIdentifier)
+    protected function getFile(ImageSettings $imageSettings, $targetFolderIdentifier)
     {
-        if (empty($imageSettings['width'])) {
+        if (!$imageSettings->isValid()) {
             throw new MissingArgumentsException('No arguments were given to placeholder controller');
         }
 

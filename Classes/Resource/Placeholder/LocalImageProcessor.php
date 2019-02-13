@@ -58,12 +58,12 @@ class LocalImageProcessor extends AbstractProcessor
     }
 
     /**
-     * @param array $imageSettings
+     * @param ImageSettings $imageSettings
      * @param string $targetFolderIdentifier
      *
      * @return File|null
      */
-    public function processFile($imageSettings, $targetFolderIdentifier)
+    public function processFile(ImageSettings $imageSettings, $targetFolderIdentifier)
     {
         $fileName = $this->getFileName($imageSettings);
         $image = $this->generateImage($imageSettings);
@@ -72,11 +72,11 @@ class LocalImageProcessor extends AbstractProcessor
     }
 
     /**
-     * @param array $imageSettings
+     * @param ImageSettings $imageSettings
      *
      * @return string
      */
-    protected function generateImage($imageSettings) : string
+    protected function generateImage(ImageSettings $imageSettings) : string
     {
         $this->loadSettings($imageSettings);
 
@@ -99,7 +99,7 @@ class LocalImageProcessor extends AbstractProcessor
             $this->text
         );
 
-        $format = $imageSettings['format'];
+        $format = $imageSettings->getFormat();
         return $this->getImageOutput($image, $format);
     }
 
@@ -131,17 +131,17 @@ class LocalImageProcessor extends AbstractProcessor
     }
 
     /**
-     * @param array $imageSettings
+     * @param ImageSettings $imageSettings
      *
      * @return void
      */
-    protected function loadSettings($imageSettings)
+    protected function loadSettings(ImageSettings $imageSettings)
     {
-        $this->bgcolor = $this->graphicalFunctions->convertColor($imageSettings['bgcolor']);
-        $this->textcolor = $this->graphicalFunctions->convertColor($imageSettings['textcolor']);
-        $this->imageWidth = $imageSettings['width'];
-        $this->imageHeight = $imageSettings['height'];
-        $this->text = $imageSettings['placeholder'];
+        $this->bgcolor = $this->graphicalFunctions->convertColor($imageSettings->getBgColor());
+        $this->textcolor = $this->graphicalFunctions->convertColor($imageSettings->getTextColor());
+        $this->imageWidth = $imageSettings->getWidth();
+        $this->imageHeight = $imageSettings->getHeight();
+        $this->text = $imageSettings->getPlaceholder();
 
         if (strlen($this->text) == 0) {
             $this->text = $this->imageWidth . 'x' . $this->imageHeight;

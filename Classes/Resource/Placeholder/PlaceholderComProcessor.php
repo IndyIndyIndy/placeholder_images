@@ -22,12 +22,12 @@ class PlaceholderComProcessor extends AbstractProcessor
 {
 
     /**
-     * @param array $imageSettings
+     * @param ImageSettings $imageSettings
      * @param string $targetFolderIdentifier
      *
      * @return File|null
      */
-    public function processFile($imageSettings, $targetFolderIdentifier)
+    public function processFile(ImageSettings $imageSettings, $targetFolderIdentifier)
     {
         $fileName = $this->getFileName($imageSettings);
         $url = $this->buildPlaceholderDotComURL($imageSettings);
@@ -37,35 +37,35 @@ class PlaceholderComProcessor extends AbstractProcessor
     }
 
     /**
-     * @param array $settings
+     * @param ImageSettings $settings
      *
      * @return string
      */
-    protected function buildPlaceholderDotComURL($settings) : string
+    protected function buildPlaceholderDotComURL(ImageSettings $settings) : string
     {
         $scheme = GeneralUtility::getIndpEnv('TYPO3_SSL') ? 'https://' : 'http://';
         $url = $scheme.'via.placeholder.com/';
 
         // dimensions
-        $width = $settings['width'];
-        $height = $settings['height'];
+        $width = $settings->getWidth();
+        $height = $settings->getHeight();
         $url .= $width . 'x' . $height;
 
         // colors
-        if (isset($settings['bgcolor']) && isset($settings['textcolor'])) {
-            $bgcolor = str_replace('#', '', $settings['bgcolor']);
-            $textcolor = str_replace('#', '', $settings['textcolor']);
+        if (strlen($settings->getBgColor()) > 0 && strlen($settings->getTextColor()) > 0) {
+            $bgcolor = str_replace('#', '', $settings->getBgColor());
+            $textcolor = str_replace('#', '', $settings->getTextColor());
             $url .= '/' . $bgcolor . '/'.$textcolor;
         }
 
         // file extension
-        if (isset($settings['format'])) {
-            $url .= '.' . $settings['format'];
+        if (strlen($settings->getFormat()) > 0) {
+            $url .= '.' . $settings->getFormat();
         }
 
         // file extension
-        if (isset($settings['placeholder']) && strlen($settings['placeholder']) > 0) {
-            $url .= '?text=' . urlencode($settings['placeholder']);
+        if (strlen($settings->getPlaceholder()) > 0) {
+            $url .= '?text=' . urlencode($settings->getPlaceholder());
         }
 
         return $url;
