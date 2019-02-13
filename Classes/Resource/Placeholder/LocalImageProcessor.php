@@ -151,6 +151,8 @@ class LocalImageProcessor extends AbstractProcessor
     }
 
     /**
+     * Start large and decrease font size until the text fits the allowed margin
+     *
      * @param string $fontFile
      *
      * @return int
@@ -158,14 +160,14 @@ class LocalImageProcessor extends AbstractProcessor
     protected function getFontSize($fontFile) : int
     {
         $size = 10;
-        $horizontalMarginModifier = 0.75;
-        $verticalMarginModifier = 0.35;
+        $maxAllowedTextWidth = $this->imageWidth * 0.75;
+        $maxAllowedTextHeight = $this->imageHeight * 0.35;
 
         for($i = 999; $i > 0; $i--) {
             $textSize = imagettfbbox($i, 0, $fontFile, $this->text);
             if(
-                ($this->getTextWidth($textSize) < $this->imageWidth * $horizontalMarginModifier) &&
-                ($this->getTextHeight($textSize) < $this->imageHeight * $verticalMarginModifier)
+                ($this->getTextWidth($textSize) < $maxAllowedTextWidth) &&
+                ($this->getTextHeight($textSize) < $maxAllowedTextHeight)
             ) {
                 $size = round($i);
                 break;
