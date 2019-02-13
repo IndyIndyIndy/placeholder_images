@@ -45,17 +45,8 @@ abstract class AbstractProcessor
         $targetFolder = $this->getTargetFolder($targetFolderIdentifier);
         $file = $this->findExistingFileForImage($image, $targetFolder);
 
-        if (!$file) {
-            $temporaryFile = GeneralUtility::tempnam('placeholder_image');
-            GeneralUtility::writeFileToTypo3tempDir($temporaryFile, $image);
-
-            if (!$this->isValidImage($temporaryFile)) {
-                GeneralUtility::unlink_tempfile($temporaryFile);
-                return null;
-            }
-
-            $file = $targetFolder->addFile($temporaryFile, $fileName, DuplicationBehavior::RENAME);
-            GeneralUtility::unlink_tempfile($temporaryFile);
+        if (!$file instanceof File) {
+            $file = $this->createNewFile($image, $fileName, $targetFolder);
         }
 
         return $file;
@@ -107,6 +98,28 @@ abstract class AbstractProcessor
                 }
             }
         }
+        return $file;
+    }
+
+    /**
+     * @param string $image
+     * @param string $fileName
+     * @param Folder $targetFolder
+     *
+     * @return File|null
+     */
+    protected function createNewFile($image, $fileName, Folder $targetFolder)
+    {
+        $file = null;
+        $temporaryFile = GeneralUtility::tempnam('placeholder_image');
+        GeneralUtility::writeFileToTypo3tempDir($temporaryFile, $image);
+
+        if ($this->isValidImage($temporaryFile)) {
+            $file = $targetFolder->addFile($temporaryFile, $fileName, DuplicationBehavior::RENAME);
+        }
+
+        GeneralUtility::unlink_tempfile($temporaryFile);
+
         return $file;
     }
 

@@ -100,6 +100,17 @@ class LocalImageProcessor extends AbstractProcessor
         );
 
         $format = $imageSettings['format'];
+        return $this->getImageOutput($image, $format);
+    }
+
+    /**
+     * @param resource $image
+     * @param string $format
+     *
+     * @return string
+     */
+    protected function getImageOutput($image, $format)  : string
+    {
         switch($format) {
             case 'png':
                 imagepng($image);
@@ -114,9 +125,9 @@ class LocalImageProcessor extends AbstractProcessor
         }
 
         imagedestroy($image);
-        $image = ob_get_contents();
+        $output = ob_get_contents();
         ob_end_clean();
-        return $image;
+        return $output;
     }
 
     /**
