@@ -1,6 +1,11 @@
 # TYPO3 Extension "placeholder_images"
 Easily add placeholder images in TYPO3 using either external sources (like placeholder.com) or generating them on the fly.
 
+[![Latest Stable Version](https://poser.pugx.org/christianessl/placeholder_images/v/stable)](https://packagist.org/packages/christianessl/placeholder_images)
+[![Total Downloads](https://poser.pugx.org/christianessl/placeholder_images/downloads)](https://packagist.org/packages/christianessl/placeholder_images)
+[![Latest Unstable Version](https://poser.pugx.org/christianessl/placeholder_images/v/unstable)](https://packagist.org/packages/christianessl/placeholder_images)
+[![License](https://poser.pugx.org/christianessl/placeholder_images/license)](https://packagist.org/packages/christianessl/placeholder_images)
+
 ## What does it do?
 
 This extensions adds a button "Add placeholder image" to content elements and other data records using FAL media fields in the TYPO3 Backend. 
