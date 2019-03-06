@@ -1,6 +1,7 @@
 # TYPO3 Extension "placeholder_images"
 Easily add placeholder images in TYPO3 using either external sources (like placeholder.com) or generating them on the fly.
 
+[![Code Climate](https://codeclimate.com/github/IndyIndyIndy/placeholder_images.svg)](https://codeclimate.com/github/IndyIndyIndy/placeholder_images)
 [![Latest Stable Version](https://poser.pugx.org/christianessl/placeholder_images/v/stable)](https://packagist.org/packages/christianessl/placeholder_images)
 [![Total Downloads](https://poser.pugx.org/christianessl/placeholder_images/downloads)](https://packagist.org/packages/christianessl/placeholder_images)
 [![Latest Unstable Version](https://poser.pugx.org/christianessl/placeholder_images/v/unstable)](https://packagist.org/packages/christianessl/placeholder_images)
